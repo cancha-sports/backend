@@ -5,9 +5,9 @@ export default class User extends Model {
     return super.init(
       {
         id: {
-          type: DataTypes.UUID,
-          defaultValue: DataTypes.UUIDV4,
+          type: DataTypes.INTEGER,
           primaryKey: true,
+          autoIncrement: true,
           allowNull: false,
         },
         name: {
