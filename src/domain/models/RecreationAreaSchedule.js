@@ -22,7 +22,7 @@ export default class RecreationAreaSchedule extends Model {
           type: DataTypes.TIME,
           allowNull: false,
         },
-        game_duration: {
+        usage_duration: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
