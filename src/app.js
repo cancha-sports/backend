@@ -1,6 +1,7 @@
 import express from "express";
 import { SportRoutes } from "./http/routes/SportRoutes.js";
 import { RecreationAreaTypeRoutes } from "./http/routes/RecreationAreaTypeRoutes.js";
+import { UserRoutes } from "./http/routes/UserRoutes.js";
 
 const app = express();
 
@@ -12,5 +13,6 @@ app.get("/", async (req, res) => {
 
 app.use("/sports", SportRoutes);
 app.use("/recreation-area-type", RecreationAreaTypeRoutes);
+app.use("/users", UserRoutes);
 
 export default app;
