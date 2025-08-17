@@ -21,7 +21,6 @@ export default class SportRepository {
       returning: true,
     });
     if (affectedCount === 0) return null;
-    console.log("repositório");
     return updatedSport;
   }
 

@@ -31,7 +31,6 @@ export default class SportService {
     if (!updated) {
       throw new AppError(`Unable to update sport with id ${id}.`, 400);
     }
-    console.log("service");
     return updated;
   }
 
