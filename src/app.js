@@ -4,6 +4,7 @@ import { RecreationAreaTypeRoutes } from "./http/routes/RecreationAreaTypeRoutes
 import { UserRoutes } from "./http/routes/UserRoutes.js";
 import { EstablishmentRoutes } from "./http/routes/EstablishmentRoutes.js";
 import { CourtRoutes } from "./http/routes/CourtRoutes.js";
+import { RecreationAreaRoutes } from "./http/routes/RecreationAreaRoutes.js";
 
 const app = express();
 
@@ -14,9 +15,10 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/sports", SportRoutes);
-app.use("/recreation-area-type", RecreationAreaTypeRoutes);
+app.use("/recreation-area-types", RecreationAreaTypeRoutes);
 app.use("/users", UserRoutes);
 app.use("/establishments", EstablishmentRoutes);
 app.use("/courts", CourtRoutes);
+app.use("/recreation-areas", RecreationAreaRoutes);
 
 export default app;
