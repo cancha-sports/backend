@@ -1,7 +1,8 @@
 import Database from "../index.js";
 import seedSport from "./20250817023249-demo-sport.cjs";
+import seedRecreationAreaType from "./20250817041600-demo-recreation-area-type.cjs";
 
-const allSeeds = [seedSport];
+const allSeeds = [seedSport, seedRecreationAreaType];
 
 const reverseSeeds = [...allSeeds].reverse();
 
