@@ -186,7 +186,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING(100),
         allowNull: false,
-        unique: true,
       },
       establishment_id: {
         type: Sequelize.INTEGER,
@@ -220,6 +219,12 @@ module.exports = {
       },
     });
 
+    await queryInterface.addConstraint("courts", {
+      fields: ["name", "establishment_id"],
+      type: "unique",
+      name: "unique_court_name_per_establishment",
+    });
+
     await queryInterface.createTable("recreation_areas", {
       id: {
         type: Sequelize.INTEGER,
@@ -230,7 +235,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING(100),
         allowNull: false,
-        unique: true,
       },
       establishment_id: {
         type: Sequelize.INTEGER,
@@ -262,6 +266,12 @@ module.exports = {
         allowNull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
+    });
+
+    await queryInterface.addConstraint("recreation_areas", {
+      fields: ["name", "establishment_id"],
+      type: "unique",
+      name: "unique_recreation_area_name_per_establishment",
     });
 
     await queryInterface.createTable("court_schedules", {
