@@ -3,6 +3,7 @@ import { SportRoutes } from "./http/routes/SportRoutes.js";
 import { RecreationAreaTypeRoutes } from "./http/routes/RecreationAreaTypeRoutes.js";
 import { UserRoutes } from "./http/routes/UserRoutes.js";
 import { EstablishmentRoutes } from "./http/routes/EstablishmentRoutes.js";
+import { CourtRoutes } from "./http/routes/CourtRoutes.js";
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use("/sports", SportRoutes);
 app.use("/recreation-area-type", RecreationAreaTypeRoutes);
 app.use("/users", UserRoutes);
 app.use("/establishments", EstablishmentRoutes);
+app.use("/courts", CourtRoutes);
 
 export default app;
