@@ -1,5 +1,6 @@
-import app from './app.js';
-import 'dotenv/config';
+import app from "./app.js";
+import "dotenv/config";
+import "./infra/database/index.js";
 
 const port = process.env.SERVER_PORT;
 
