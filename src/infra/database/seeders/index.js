@@ -5,6 +5,7 @@ import seedUserRole from "./20250817125936-demo-user-role.cjs";
 import seedUser from "./20250817195706-demo-user.cjs";
 import seedEstablishment from "./20250817195252-demo-establishment.cjs";
 import seedCourt from "./20250817213015-demo-court.cjs";
+import seedRecreationArea from "./20250817224624-demo-recreation-area.cjs";
 
 const allSeeds = [
   seedSport,
@@ -13,6 +14,7 @@ const allSeeds = [
   seedUser,
   seedEstablishment,
   seedCourt,
+  seedRecreationArea,
 ];
 
 const reverseSeeds = [...allSeeds].reverse();
