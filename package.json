@@ -1,5 +1,5 @@
 {
-  "name": "marcarquadraapi",
+  "name": "cancha-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcosschlick/MarcarQuadraAPI.git"
+    "url": "git+https://github.com/marcosschlick/cancha-backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/marcosschlick/MarcarQuadraAPI/issues"
+    "url": "https://github.com/marcosschlick/cancha-backend/issues"
   },
-  "homepage": "https://github.com/marcosschlick/MarcarQuadraAPI#readme",
+  "homepage": "https://github.com/marcosschlick/cancha-backend#readme",
   "devDependencies": {
     "sequelize-cli": "^6.6.3"
   },

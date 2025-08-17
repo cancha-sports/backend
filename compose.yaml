@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:17
-    container_name: marcarquadra_postgres
+    container_name: cancha_postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER}
@@ -12,11 +12,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - marcarquadra_postgres
+      - cancha_postgres
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: marcarquadra_pgadmin
+    container_name: cancha_pgadmin
     restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
@@ -26,7 +26,7 @@ services:
     depends_on:
       - db
     networks:
-      - marcarquadra_postgres
+      - cancha_postgres
     volumes:
       - pgadmin_data:/var/lib/pgadmin
 
@@ -35,5 +35,5 @@ volumes:
   pgadmin_data: {}
 
 networks:
-  marcarquadra_postgres:
+  cancha_postgres:
     driver: bridge
