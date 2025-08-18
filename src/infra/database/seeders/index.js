@@ -7,6 +7,7 @@ import seedEstablishment from "./20250817195252-demo-establishment.cjs";
 import seedCourt from "./20250817213015-demo-court.cjs";
 import seedRecreationArea from "./20250817224624-demo-recreation-area.cjs";
 import seedCourtSchedule from "./20250818001447-demo-court-schedule.cjs";
+import seedRecreationAreaSchedule from "./20250818020448-demo-recreation-area-schedule.cjs";
 
 const allSeeds = [
   seedSport,
@@ -17,6 +18,7 @@ const allSeeds = [
   seedCourt,
   seedRecreationArea,
   seedCourtSchedule,
+  seedRecreationAreaSchedule,
 ];
 
 const reverseSeeds = [...allSeeds].reverse();
