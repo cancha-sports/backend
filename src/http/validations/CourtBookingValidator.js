@@ -43,6 +43,7 @@ export const createCourtBookingSchema = z.object({
       invalid_type_error: "Amount paid must be a number.",
     })
     .min(0, "Amount paid must be a non-negative number."),
+
   status: z.enum(["confirmed", "canceled"], {
     required_error: "Status is required.",
     invalid_type_error: "Status must be either 'confirmed' or 'canceled'.",
