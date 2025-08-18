@@ -6,6 +6,7 @@ import { EstablishmentRoutes } from "./http/routes/EstablishmentRoutes.js";
 import { CourtRoutes } from "./http/routes/CourtRoutes.js";
 import { RecreationAreaRoutes } from "./http/routes/RecreationAreaRoutes.js";
 import { CourtScheduleRoutes } from "./http/routes/CourtScheduleRoutes.js";
+import { RecreationAreaScheduleRoutes } from "./http/routes/RecreationAreaScheduleRoutes.js";
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use("/establishments", EstablishmentRoutes);
 app.use("/courts", CourtRoutes);
 app.use("/recreation-areas", RecreationAreaRoutes);
 app.use("/court-schedules", CourtScheduleRoutes);
+app.use("/recreation-area-schedules", RecreationAreaScheduleRoutes);
 
 export default app;
