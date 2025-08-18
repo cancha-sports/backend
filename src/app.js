@@ -8,6 +8,7 @@ import { RecreationAreaRoutes } from "./http/routes/RecreationAreaRoutes.js";
 import { CourtScheduleRoutes } from "./http/routes/CourtScheduleRoutes.js";
 import { RecreationAreaScheduleRoutes } from "./http/routes/RecreationAreaScheduleRoutes.js";
 import { CourtBookingRoutes } from "./http/routes/CourtBookingRoutes.js";
+import { RecreationAreaBookingRoutes } from "./http/routes/RecreationAreaBookingRoutes.js";
 
 const app = express();
 
@@ -26,5 +27,6 @@ app.use("/recreation-areas", RecreationAreaRoutes);
 app.use("/court-schedules", CourtScheduleRoutes);
 app.use("/recreation-area-schedules", RecreationAreaScheduleRoutes);
 app.use("/court-bookings", CourtBookingRoutes);
+app.use("/recreation-area-bookings", RecreationAreaBookingRoutes);
 
 export default app;
