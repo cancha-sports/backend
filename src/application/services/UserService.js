@@ -12,6 +12,7 @@ export default class UserService {
       password_hash: hashedPassword,
       birth_date: userDTO.birth_date,
       role_id: userDTO.role_id,
+      photo: userDTO.photo,
     };
     const created = await UserRepository.create(userData);
     if (!created) {
@@ -34,6 +35,20 @@ export default class UserService {
       throw new AppError(`User with id ${id} not found`, 404);
     }
     return user;
+  }
+
+  static async update(id, updatedData) {
+    const hashedPassword = await hashPassword(updatedData.password);
+    const userData = {
+      name: updatedData.name,
+      password_hash: hashedPassword,
+      photo: updatedData.photo,
+    };
+    const updated = await UserRepository.update(id, userData);
+    if (!updated) {
+      throw new AppError(`Unable to update user with id ${id}.`, 400);
+    }
+    return updated;
   }
 
   static async delete(id) {

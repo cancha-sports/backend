@@ -13,6 +13,15 @@ export default class UserRepository {
     return await User.findByPk(id);
   }
 
+  static async update(id, updatedData) {
+    const [affectedCount, [updatedUser]] = await User.update(updatedData, {
+      where: { id },
+      returning: true,
+    });
+    if (affectedCount === 0) return null;
+    return updatedUser;
+  }
+
   static async delete(id) {
     return await User.destroy({
       where: { id },

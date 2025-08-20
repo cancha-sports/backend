@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const userSchema = z.object({
+export const createUserSchema = z.object({
   name: z
     .string()
     .min(1, "Name is required.")
@@ -54,4 +54,37 @@ export const userSchema = z.object({
     })
     .int("Role ID must be an integer.")
     .positive("Role ID must be a positive number."),
+
+  photo: z
+    .string()
+    .max(255, "Photo must be at most 255 characters.")
+    .optional(),
+});
+
+export const updateUserSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Name is required.")
+    .max(100, "Name must be at most 100 characters.")
+    .optional(),
+
+  password: z
+    .string()
+    .min(8, "Password must contain at least 8 characters.")
+    .max(64, "Password must be at most 64 characters.")
+    .refine((val) => !val || /[A-Z]/.test(val), {
+      message: "Password must contain at least one uppercase letter (A-Z).",
+    })
+    .refine((val) => !val || /[0-9]/.test(val), {
+      message: "Password must contain at least one number (0-9).",
+    })
+    .refine((val) => !val || /[!@#$%^&*(),.?":{}|<>]/.test(val), {
+      message: "Password must contain at least one special character.",
+    })
+    .optional(),
+
+  photo: z
+    .string()
+    .max(255, "Photo must be at most 255 characters.")
+    .optional(),
 });
