@@ -40,6 +40,10 @@ export default class User extends Model {
           type: DataTypes.DATE,
           allowNull: true,
         },
+        photo: {
+          type: DataTypes.STRING(255),
+          allowNull: true,
+        },
       },
       {
         sequelize,
@@ -50,7 +54,7 @@ export default class User extends Model {
         underscored: true,
         paranoid: true,
         deletedAt: "deleted_at",
-      },
+      }
     );
   }
 

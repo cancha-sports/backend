@@ -27,6 +27,10 @@ export default class Establishment extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        photo: {
+          type: DataTypes.STRING(255),
+          allowNull: true,
+        },
       },
       {
         sequelize,
@@ -35,7 +39,7 @@ export default class Establishment extends Model {
         createdAt: "created_at",
         updatedAt: "updated_at",
         underscored: true,
-      },
+      }
     );
   }
 

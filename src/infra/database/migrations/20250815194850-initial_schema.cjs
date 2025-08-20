@@ -118,6 +118,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
+      photo: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -164,6 +169,11 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "RESTRICT",
       },
+      photo: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        defaultValue: null,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -206,6 +216,11 @@ module.exports = {
         },
         onUpdate: "CASCADE",
         onDelete: "RESTRICT",
+      },
+      photo: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        defaultValue: null,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -255,6 +270,11 @@ module.exports = {
         },
         onUpdate: "CASCADE",
         onDelete: "RESTRICT",
+      },
+      photo: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        defaultValue: null,
       },
       created_at: {
         type: Sequelize.DATE,
