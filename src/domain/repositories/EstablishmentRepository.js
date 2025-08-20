@@ -13,6 +13,18 @@ export default class EstablishmentRepository {
     return await Establishment.findByPk(id);
   }
 
+  static async update(id, updatedData) {
+    const [affectedCount, [updatedEstablishment]] = await Establishment.update(
+      updatedData,
+      {
+        where: { id },
+        returning: true,
+      }
+    );
+    if (affectedCount === 0) return null;
+    return updatedEstablishment;
+  }
+
   static async delete(id) {
     return await Establishment.destroy({
       where: { id },

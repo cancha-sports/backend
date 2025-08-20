@@ -26,6 +26,14 @@ export default class EstablishmentService {
     return establishment;
   }
 
+  static async update(id, updatedData) {
+    const updated = await EstablishmentRepository.update(id, updatedData);
+    if (!updated) {
+      throw new AppError(`Unable to update establishment with id ${id}.`, 400);
+    }
+    return updated;
+  }
+
   static async delete(id) {
     const deletedCount = await EstablishmentRepository.delete(id);
     if (deletedCount === 0) {
