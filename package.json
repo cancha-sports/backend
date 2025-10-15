@@ -1,5 +1,5 @@
 {
-  "name": "cancha-backend",
+  "name": "cancha",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcosschlick/cancha-backend.git"
+    "url": "git+https://github.com/cancha-sports/backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/marcosschlick/cancha-backend/issues"
+    "url": "https://github.com/cancha-sports/backend/issues"
   },
-  "homepage": "https://github.com/marcosschlick/cancha-backend#readme",
+  "homepage": "https://github.com/cancha-sports/backend#readme",
   "devDependencies": {
     "sequelize-cli": "^6.6.3"
   },
