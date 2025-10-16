@@ -37,13 +37,6 @@ export const createRecreationAreaBookingSchema = z.object({
       "Invalid datetime format. Use YYYY-MM-DD HH:MM:SS."
     ),
 
-  amount_paid: z
-    .number({
-      required_error: "Amount paid is required.",
-      invalid_type_error: "Amount paid must be a number.",
-    })
-    .min(0, "Amount paid must be a non-negative number."),
-
   status: z.enum(["confirmed", "canceled"], {
     required_error: "Status is required.",
     invalid_type_error: "Status must be either 'confirmed' or 'canceled'.",
@@ -69,13 +62,6 @@ export const updateRecreationAreaBookingSchema = z.object({
       /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/,
       "Invalid datetime format. Use YYYY-MM-DD HH:MM:SS."
     )
-    .optional(),
-
-  amount_paid: z
-    .number({
-      invalid_type_error: "Amount paid must be a number.",
-    })
-    .min(0, "Amount paid must be a non-negative number.")
     .optional(),
 
   status: z

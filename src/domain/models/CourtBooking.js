@@ -26,10 +26,6 @@ export default class CourtBooking extends Model {
           type: DataTypes.DATE,
           allowNull: false,
         },
-        amount_paid: {
-          type: DataTypes.DECIMAL(10, 2),
-          allowNull: false,
-        },
         status: {
           type: DataTypes.ENUM("confirmed", "canceled"),
           allowNull: false,
@@ -42,7 +38,7 @@ export default class CourtBooking extends Model {
         createdAt: "created_at",
         updatedAt: "updated_at",
         underscored: true,
-      },
+      }
     );
   }
 

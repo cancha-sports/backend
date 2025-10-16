@@ -27,6 +27,11 @@ export default class Establishment extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        working_days: {
+          type: DataTypes.ARRAY(DataTypes.INTEGER),
+          allowNull: false,
+          defaultValue: [1, 2, 3, 4, 5], // mon - fri
+        },
         photo: {
           type: DataTypes.STRING(255),
           allowNull: true,

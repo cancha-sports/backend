@@ -169,6 +169,11 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "RESTRICT",
       },
+      working_days: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        allowNull: false,
+        defaultValue: [1, 2, 3, 4, 5], // mon - fri
+      },
       photo: {
         type: Sequelize.STRING(255),
         allowNull: true,
@@ -324,7 +329,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      price: {
+      price_brl: {
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
+      },
+      price_uyu: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
@@ -370,7 +379,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      price: {
+      price_brl: {
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
+      },
+      price_uyu: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
@@ -419,10 +432,6 @@ module.exports = {
       },
       end_time: {
         type: Sequelize.DATE,
-        allowNull: false,
-      },
-      amount_paid: {
-        type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
       status: {
@@ -474,10 +483,6 @@ module.exports = {
       },
       end_time: {
         type: Sequelize.DATE,
-        allowNull: false,
-      },
-      amount_paid: {
-        type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
       status: {

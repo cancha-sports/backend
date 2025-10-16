@@ -26,7 +26,11 @@ export default class RecreationAreaSchedule extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        price: {
+        price_brl: {
+          type: DataTypes.DECIMAL(10, 2),
+          allowNull: false,
+        },
+        price_uyu: {
           type: DataTypes.DECIMAL(10, 2),
           allowNull: false,
         },
@@ -38,7 +42,7 @@ export default class RecreationAreaSchedule extends Model {
         createdAt: "created_at",
         updatedAt: "updated_at",
         underscored: true,
-      },
+      }
     );
   }
 

@@ -30,6 +30,26 @@ export const createEstablishmentSchema = z.object({
     .int("Owner ID must be an integer.")
     .positive("Owner ID must be a positive number."),
 
+  working_days: z
+    .array(
+      z
+        .number({
+          required_error: "Working day is required.",
+          invalid_type_error: "Working day must be a number.",
+        })
+        .int("Working day must be an integer.")
+        .min(0, "Working day must be between 0 (Sunday) and 6 (Saturday).")
+        .max(6, "Working day must be between 0 (Sunday) and 6 (Saturday).")
+    )
+    .min(1, "At least one working day is required.")
+    .refine(
+      (days) => {
+        const uniqueDays = [...new Set(days)];
+        return uniqueDays.length === days.length;
+      },
+      { message: "Working days must be unique." }
+    ),
+
   photo: z
     .string()
     .max(255, "Photo must be at most 255 characters.")
@@ -57,6 +77,26 @@ export const updateEstablishmentSchema = z.object({
     })
     .min(-180, "Longitude must be between -180 and 180.")
     .max(180, "Longitude must be between -180 and 180.")
+    .optional(),
+
+  working_days: z
+    .array(
+      z
+        .number({
+          invalid_type_error: "Working day must be a number.",
+        })
+        .int("Working day must be an integer.")
+        .min(0, "Working day must be between 0 (Sunday) and 6 (Saturday).")
+        .max(6, "Working day must be between 0 (Sunday) and 6 (Saturday).")
+    )
+    .min(1, "At least one working day is required.")
+    .refine(
+      (days) => {
+        const uniqueDays = [...new Set(days)];
+        return uniqueDays.length === days.length;
+      },
+      { message: "Working days must be unique." }
+    )
     .optional(),
 
   photo: z

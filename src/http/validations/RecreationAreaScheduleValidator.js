@@ -37,12 +37,19 @@ export const createRecreationAreaScheduleSchema = z.object({
     .int("Usage duration must be an integer.")
     .positive("Usage duration must be a positive number."),
 
-  price: z
+  price_brl: z
     .number({
-      required_error: "Price is required.",
-      invalid_type_error: "Price must be a number.",
+      required_error: "Price in BRL is required.",
+      invalid_type_error: "Price in BRL must be a number.",
     })
-    .min(0, "Price must be a non-negative number."),
+    .min(0, "Price in BRL must be a non-negative number."),
+
+  price_uyu: z
+    .number({
+      required_error: "Price in UYU is required.",
+      invalid_type_error: "Price in UYU must be a number.",
+    })
+    .min(0, "Price in UYU must be a non-negative number."),
 });
 
 export const updateRecreationAreaScheduleSchema = z.object({
@@ -74,10 +81,17 @@ export const updateRecreationAreaScheduleSchema = z.object({
     .positive("Usage duration must be a positive number.")
     .optional(),
 
-  price: z
+  price_brl: z
     .number({
-      invalid_type_error: "Price must be a number.",
+      invalid_type_error: "Price in BRL must be a number.",
     })
-    .min(0, "Price must be a non-negative number.")
+    .min(0, "Price in BRL must be a non-negative number.")
+    .optional(),
+
+  price_uyu: z
+    .number({
+      invalid_type_error: "Price in UYU must be a number.",
+    })
+    .min(0, "Price in UYU must be a non-negative number.")
     .optional(),
 });
