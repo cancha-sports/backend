@@ -13,6 +13,14 @@ export default class UserRepository {
     return await User.findByPk(id);
   }
 
+  static async findByEmail(email) {
+    return await User.findOne({ where: { email } });
+  }
+
+  static async findByPhone(phone) {
+    return await User.findOne({ where: { phone } });
+  }
+
   static async update(id, updatedData) {
     const [affectedCount, [updatedUser]] = await User.update(updatedData, {
       where: { id },

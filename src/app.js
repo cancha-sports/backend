@@ -9,6 +9,7 @@ import { CourtScheduleRoutes } from "./http/routes/CourtScheduleRoutes.js";
 import { RecreationAreaScheduleRoutes } from "./http/routes/RecreationAreaScheduleRoutes.js";
 import { CourtBookingRoutes } from "./http/routes/CourtBookingRoutes.js";
 import { RecreationAreaBookingRoutes } from "./http/routes/RecreationAreaBookingRoutes.js";
+import { AuthRoutes } from "./http/routes/AuthRoutes.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/", async (req, res) => {
   res.status(200).json({ ok: "true" });
 });
 
+app.use("/auth", AuthRoutes);
 app.use("/sports", SportRoutes);
 app.use("/recreation-area-types", RecreationAreaTypeRoutes);
 app.use("/users", UserRoutes);

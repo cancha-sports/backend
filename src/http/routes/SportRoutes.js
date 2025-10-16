@@ -1,12 +1,13 @@
 import { Router } from "express";
 import SportController from "../controllers/SportController.js";
+import { authMiddleware } from "../middlewares/auth.js";
 
 const router = new Router();
 
-router.post("/", SportController.create);
-router.get("/", SportController.findAll);
-router.get("/:id", SportController.findById);
-router.patch("/:id", SportController.update);
-router.delete("/:id", SportController.delete);
+router.post("/", authMiddleware, SportController.create);
+router.get("/", authMiddleware, SportController.findAll);
+router.get("/:id", authMiddleware, SportController.findById);
+router.patch("/:id", authMiddleware, SportController.update);
+router.delete("/:id", authMiddleware, SportController.delete);
 
 export { router as SportRoutes };
