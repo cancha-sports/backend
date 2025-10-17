@@ -46,6 +46,17 @@ export default class CourtBookingController {
     }
   }
 
+  static async findByCourtId(req, res) {
+    try {
+      const courtBookings = await CourtBookingService.findByCourtId(
+        req.params.court_id
+      );
+      return res.status(200).json(courtBookings);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
   static async update(req, res) {
     try {
       const validatedData = updateCourtBookingSchema.parse(req.body);

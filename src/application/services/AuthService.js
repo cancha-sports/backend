@@ -45,7 +45,7 @@ export default class AuthService {
     return { user: userWithoutPassword, token };
   }
 
-  static async login(loginDTO) {
+  static async loginOwner(loginDTO) {
     const user = await UserRepository.findByEmail(loginDTO.email);
     if (!user) {
       throw new AppError("Invalid email or password.", 401);
@@ -58,6 +58,40 @@ export default class AuthService {
     );
     if (!isPasswordValid) {
       throw new AppError("Invalid email or password.", 401);
+    }
+
+    if (user.role_id !== 3) {
+      throw new AppError("Access denied. Only court owners can login.", 403);
+    }
+
+    // Generate JWT token
+    const token = this.generateToken(user);
+
+    // Remove password from response
+    const { password_hash, ...userWithoutPassword } = user.toJSON
+      ? user.toJSON()
+      : user;
+
+    return { user: userWithoutPassword, token };
+  }
+
+  static async loginUser(loginDTO) {
+    const user = await UserRepository.findByEmail(loginDTO.email);
+    if (!user) {
+      throw new AppError("Invalid email or password.", 401);
+    }
+
+    // Check password
+    const isPasswordValid = await checkPasswordHash(
+      loginDTO.password,
+      user.password_hash
+    );
+    if (!isPasswordValid) {
+      throw new AppError("Invalid email or password.", 401);
+    }
+
+    if (user.role_id !== 2) {
+      throw new AppError("Access denied. Only regular users can login.", 403);
     }
 
     // Generate JWT token

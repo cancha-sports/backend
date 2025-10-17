@@ -13,6 +13,10 @@ export default class CourtBookingRepository {
     return await CourtBooking.findByPk(id);
   }
 
+  static async findByCourtId(court_id) {
+    return await CourtBooking.findAll({ where: { court_id } });
+  }
+
   static async update(id, updatedData) {
     const [affectedCount, [updatedCourtBooking]] = await CourtBooking.update(
       updatedData,

@@ -7,6 +7,11 @@ const router = new Router();
 router.post("/", authMiddleware, CourtController.create);
 router.get("/", authMiddleware, CourtController.findAll);
 router.get("/:id", authMiddleware, CourtController.findById);
+router.get(
+  "/establishment/:establishment_id",
+  authMiddleware,
+  CourtController.findByEstablishmentId
+);
 router.patch("/:id", authMiddleware, CourtController.update);
 router.delete("/:id", authMiddleware, CourtController.delete);
 

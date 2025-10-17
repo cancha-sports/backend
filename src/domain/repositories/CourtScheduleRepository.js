@@ -13,6 +13,10 @@ export default class CourtScheduleRepository {
     return await CourtSchedule.findByPk(id);
   }
 
+  static async findByCourtId(court_id) {
+    return await CourtSchedule.findAll({ where: { court_id } });
+  }
+
   static async update(id, updatedData) {
     const [affectedCount, [updatedCourtSchedule]] = await CourtSchedule.update(
       updatedData,

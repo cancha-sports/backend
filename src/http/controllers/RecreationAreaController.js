@@ -50,6 +50,17 @@ export default class RecreationAreaController {
     }
   }
 
+  static async findByEstablishmentId(req, res) {
+    try {
+      const recreationAreas = await RecreationAreaService.findByEstablishmentId(
+        req.params.establishment_id
+      );
+      return res.status(200).json(recreationAreas);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
   static async update(req, res) {
     try {
       const validatedData = updateRecreationAreaSchema.parse(req.body);

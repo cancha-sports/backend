@@ -15,6 +15,10 @@ export default class CourtRepository {
     return await Court.findByPk(id);
   }
 
+  static async findByEstablishmentId(establishment_id) {
+    return await Court.findAll({ where: { establishment_id } });
+  }
+
   static async update(id, updatedData) {
     const [affectedCount, [updatedCourt]] = await Court.update(updatedData, {
       where: { id },

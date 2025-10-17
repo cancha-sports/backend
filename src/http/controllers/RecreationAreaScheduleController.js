@@ -49,6 +49,18 @@ export default class RecreationAreaScheduleController {
     }
   }
 
+  static async findByRecreationAreaId(req, res) {
+    try {
+      const recreationAreaSchedules =
+        await RecreationAreaScheduleService.findByRecreationAreaId(
+          req.params.recreation_area_id
+        );
+      return res.status(200).json(recreationAreaSchedules);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
   static async update(req, res) {
     try {
       const validatedData = updateRecreationAreaScheduleSchema.parse(req.body);

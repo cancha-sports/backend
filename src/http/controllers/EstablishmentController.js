@@ -46,6 +46,17 @@ export default class EstablishmentController {
     }
   }
 
+  static async findByOwnerId(req, res) {
+    try {
+      const courts = await EstablishmentService.findByOwnerId(
+        req.params.owner_id
+      );
+      return res.status(200).json(courts);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
   static async update(req, res) {
     try {
       const validatedData = updateEstablishmentSchema.parse(req.body);

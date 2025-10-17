@@ -46,6 +46,17 @@ export default class CourtScheduleController {
     }
   }
 
+  static async findByCourtId(req, res) {
+    try {
+      const courtSchedules = await CourtScheduleService.findByCourtId(
+        req.params.court_id
+      );
+      return res.status(200).json(courtSchedules);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
   static async update(req, res) {
     try {
       const validatedData = updateCourtScheduleSchema.parse(req.body);

@@ -26,6 +26,16 @@ export default class CourtService {
     return court;
   }
 
+  static async findByEstablishmentId(establishment_id) {
+    const courts = await CourtRepository.findByEstablishmentId(
+      establishment_id
+    );
+    if (courts.length === 0) {
+      throw new AppError("No courts found", 404);
+    }
+    return courts;
+  }
+
   static async update(id, updatedData) {
     const updated = await CourtRepository.update(id, updatedData);
     if (!updated) {

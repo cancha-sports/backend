@@ -26,6 +26,14 @@ export default class CourtBookingService {
     return courtBooking;
   }
 
+  static async findByCourtId(court_id) {
+    const courts = await CourtBookingRepository.findByCourtId(court_id);
+    if (courts.length === 0) {
+      throw new AppError("No court bookings found", 404);
+    }
+    return courts;
+  }
+
   static async update(id, updatedData) {
     const updated = await CourtBookingRepository.update(id, updatedData);
     if (!updated) {

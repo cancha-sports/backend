@@ -13,6 +13,10 @@ export default class EstablishmentRepository {
     return await Establishment.findByPk(id);
   }
 
+  static async findByOwnerId(owner_id) {
+    return await Establishment.findAll({ where: { owner_id } });
+  }
+
   static async update(id, updatedData) {
     const [affectedCount, [updatedEstablishment]] = await Establishment.update(
       updatedData,

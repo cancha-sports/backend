@@ -44,6 +44,17 @@ export default class CourtController {
     }
   }
 
+  static async findByEstablishmentId(req, res) {
+    try {
+      const courts = await CourtService.findByEstablishmentId(
+        req.params.establishment_id
+      );
+      return res.status(200).json(courts);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
   static async update(req, res) {
     try {
       const validatedData = updateCourtSchema.parse(req.body);

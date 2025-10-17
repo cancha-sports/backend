@@ -26,6 +26,14 @@ export default class EstablishmentService {
     return establishment;
   }
 
+  static async findByOwnerId(owner_id) {
+    const courts = await EstablishmentRepository.findByOwnerId(owner_id);
+    if (courts.length === 0) {
+      throw new AppError("No establishments found", 404);
+    }
+    return courts;
+  }
+
   static async update(id, updatedData) {
     const updated = await EstablishmentRepository.update(id, updatedData);
     if (!updated) {

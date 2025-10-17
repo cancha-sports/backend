@@ -26,6 +26,15 @@ export default class RecreationAreaService {
     return recreationArea;
   }
 
+  static async findByEstablishmentId(establishment_id) {
+    const recreationAreas =
+      await RecreationAreaRepository.findByEstablishmentId(establishment_id);
+    if (recreationAreas.length === 0) {
+      throw new AppError("No recreation areas found", 404);
+    }
+    return recreationAreas;
+  }
+
   static async update(id, updatedData) {
     const updated = await RecreationAreaRepository.update(id, updatedData);
     if (!updated) {

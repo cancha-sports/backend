@@ -9,7 +9,7 @@ import {
 } from "../validations/UserValidator.js";
 import { ZodError } from "zod";
 
-export default class SportController {
+export default class UserController {
   static async create(req, res) {
     try {
       const validatedData = createUserSchema.parse(req.body);

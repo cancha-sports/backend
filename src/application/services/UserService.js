@@ -38,12 +38,15 @@ export default class UserService {
   }
 
   static async update(id, updatedData) {
-    const hashedPassword = await hashPassword(updatedData.password);
     const userData = {
       name: updatedData.name,
-      password_hash: hashedPassword,
       photo: updatedData.photo,
     };
+
+    if (updatedData.password) {
+      userData.password_hash = await hashPassword(updatedData.password);
+    }
+
     const updated = await UserRepository.update(id, userData);
     if (!updated) {
       throw new AppError(`Unable to update user with id ${id}.`, 400);

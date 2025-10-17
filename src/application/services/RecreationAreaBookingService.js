@@ -33,6 +33,17 @@ export default class RecreationAreaBookingService {
     return recreationAreaBooking;
   }
 
+  static async findByRecreationAreaId(recreation_area_id) {
+    const recreationAreaBookings =
+      await RecreationAreaBookingRepository.findByRecreationAreaId(
+        recreation_area_id
+      );
+    if (recreationAreaBookings.length === 0) {
+      throw new AppError("No recreation area bookings found", 404);
+    }
+    return recreationAreaBookings;
+  }
+
   static async update(id, updatedData) {
     const updated = await RecreationAreaBookingRepository.update(
       id,

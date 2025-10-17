@@ -13,6 +13,12 @@ export default class RecreationAreaScheduleRepository {
     return await RecreationAreaSchedule.findByPk(id);
   }
 
+  static async findByRecreationAreaId(recreation_area_id) {
+    return await RecreationAreaSchedule.findAll({
+      where: { recreation_area_id },
+    });
+  }
+
   static async update(id, updatedData) {
     const [affectedCount, [updatedRecreationAreaSchedule]] =
       await RecreationAreaSchedule.update(updatedData, {

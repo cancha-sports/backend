@@ -25,11 +25,28 @@ export default class AuthController {
     }
   }
 
-  static async login(req, res) {
+  static async loginOwner(req, res) {
     try {
       const validatedData = loginSchema.parse(req.body);
       const loginDTO = new LoginDTO(validatedData);
-      const authResponse = await AuthService.login(loginDTO);
+      const authResponse = await AuthService.loginOwner(loginDTO);
+
+      return res.status(200).json(authResponse);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res
+          .status(400)
+          .json({ error: error.errors.map((e) => e.message) });
+      }
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async loginUser(req, res) {
+    try {
+      const validatedData = loginSchema.parse(req.body);
+      const loginDTO = new LoginDTO(validatedData);
+      const authResponse = await AuthService.loginUser(loginDTO);
 
       return res.status(200).json(authResponse);
     } catch (error) {

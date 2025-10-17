@@ -13,6 +13,12 @@ export default class RecreationAreaBookingRepository {
     return await RecreationAreaBooking.findByPk(id);
   }
 
+  static async findByRecreationAreaId(recreation_area_id) {
+    return await RecreationAreaBooking.findAll({
+      where: { recreation_area_id },
+    });
+  }
+
   static async update(id, updatedData) {
     const [affectedCount, [updatedRecreationAreaBooking]] =
       await RecreationAreaBooking.update(updatedData, {

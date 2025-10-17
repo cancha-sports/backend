@@ -26,6 +26,14 @@ export default class CourtScheduleService {
     return courtSchedule;
   }
 
+  static async findByCourtId(court_id) {
+    const courts = await CourtScheduleRepository.findByCourtId(court_id);
+    if (courts.length === 0) {
+      throw new AppError("No court schedules found", 404);
+    }
+    return courts;
+  }
+
   static async update(id, updatedData) {
     const updated = await CourtScheduleRepository.update(id, updatedData);
     if (!updated) {

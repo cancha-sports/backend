@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { SportRoutes } from "./http/routes/SportRoutes.js";
 import { RecreationAreaTypeRoutes } from "./http/routes/RecreationAreaTypeRoutes.js";
 import { UserRoutes } from "./http/routes/UserRoutes.js";
@@ -12,6 +13,15 @@ import { RecreationAreaBookingRoutes } from "./http/routes/RecreationAreaBooking
 import { AuthRoutes } from "./http/routes/AuthRoutes.js";
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 

@@ -33,6 +33,17 @@ export default class RecreationAreaScheduleService {
     return recreationAreaSchedule;
   }
 
+  static async findByRecreationAreaId(recreation_area_id) {
+    const recreationAreaSchedules =
+      await RecreationAreaScheduleRepository.findByRecreationAreaId(
+        recreation_area_id
+      );
+    if (recreationAreaSchedules.length === 0) {
+      throw new AppError("No recreation area schedules found", 404);
+    }
+    return recreationAreaSchedules;
+  }
+
   static async update(id, updatedData) {
     const updated = await RecreationAreaScheduleRepository.update(
       id,
