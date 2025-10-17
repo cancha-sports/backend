@@ -12,8 +12,8 @@ export class RegisterDTO {
     this.phone = phone;
     this.password = password;
     this.birth_date = birth_date;
-    this.photo = photo;
     this.role_id = role_id;
+    this.photo = photo;
   }
 }
 

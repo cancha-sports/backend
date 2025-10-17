@@ -28,10 +28,8 @@ export const createUserSchema = z.object({
   phone: z
     .string()
     .min(1, "Phone number is required.")
-    .regex(
-      /^\d{11,}$/,
-      "Phone number must contain at least 11 numeric digits without spaces or special characters."
-    ),
+    .min(8, "Phone number must contain at least 8 characters.")
+    .max(20, "Phone number must be at most 20 characters."),
 
   password: z
     .string()

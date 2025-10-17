@@ -28,10 +28,8 @@ export const registerSchema = z.object({
   phone: z
     .string()
     .min(1, "Phone number is required.")
-    .regex(
-      /^\d{11,}$/,
-      "Phone number must contain at least 11 numeric digits without spaces or special characters."
-    ),
+    .min(8, "Phone number must contain at least 8 characters.")
+    .max(20, "Phone number must be at most 20 characters."),
 
   password: z
     .string()
@@ -46,6 +44,14 @@ export const registerSchema = z.object({
     .refine((val) => /[!@#$%^&*(),.?":{}|<>]/.test(val), {
       message: "Password must contain at least one special character.",
     }),
+
+  role_id: z
+    .number({
+      required_error: "Role ID is required.",
+      invalid_type_error: "Role ID must be a number.",
+    })
+    .int("Role ID must be an integer.")
+    .positive("Role ID must be a positive number."),
 
   photo: z
     .string()

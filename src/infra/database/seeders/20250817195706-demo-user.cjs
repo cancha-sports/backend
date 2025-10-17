@@ -9,7 +9,7 @@ module.exports = {
       {
         name: "João Silva",
         email: "joao.silva@example.com",
-        phone: "11987654321",
+        phone: "+55 11 98765-4321",
         password_hash: hashedPassword,
         birth_date: "1990-01-15",
         role_id: 1,
@@ -17,7 +17,7 @@ module.exports = {
       {
         name: "Maria Oliveira",
         email: "maria.oliveira@example.com",
-        phone: "21998765432",
+        phone: "+55 21 99876-5432",
         password_hash: hashedPassword,
         birth_date: "1985-05-22",
         role_id: 1,
@@ -25,7 +25,7 @@ module.exports = {
       {
         name: "Carlos Pereira",
         email: "carlos.pereira@example.com",
-        phone: "31991234567",
+        phone: "+55 31 99123-4567",
         password_hash: hashedPassword,
         birth_date: "1992-11-30",
         role_id: 2,
@@ -33,7 +33,7 @@ module.exports = {
       {
         name: "Ana Costa",
         email: "ana.costa@example.com",
-        phone: "41992345678",
+        phone: "+55 41 99234-5678",
         password_hash: hashedPassword,
         birth_date: "1988-07-10",
         role_id: 2,
@@ -41,7 +41,7 @@ module.exports = {
       {
         name: "Pedro Santos",
         email: "pedro.santos@example.com",
-        phone: "51993456789",
+        phone: "+55 51 99345-6789",
         password_hash: hashedPassword,
         birth_date: "1995-03-25",
         role_id: 3,
@@ -49,7 +49,7 @@ module.exports = {
       {
         name: "Juliana Lima",
         email: "juliana.lima@example.com",
-        phone: "61994567890",
+        phone: "+55 61 99456-7890",
         password_hash: hashedPassword,
         birth_date: "1998-09-18",
         role_id: 3,
