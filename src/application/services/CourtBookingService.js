@@ -34,6 +34,48 @@ export default class CourtBookingService {
     return courts;
   }
 
+  static async findByUserId(user_id) {
+    const courtBookings = await CourtBookingRepository.findByUserId(user_id);
+    if (courtBookings.length === 0) {
+      throw new AppError("No court bookings found", 404);
+    }
+    return courtBookings;
+  }
+
+  static async findUpcomingByUserId(user_id) {
+    const courtBookings = await CourtBookingRepository.findUpcomingByUserId(
+      user_id
+    );
+    if (courtBookings.length === 0) {
+      throw new AppError("No upcoming court bookings found", 404);
+    }
+    return courtBookings;
+  }
+
+  static async findHistoryByUserId(user_id) {
+    const courtBookings = await CourtBookingRepository.findHistoryByUserId(
+      user_id
+    );
+    if (courtBookings.length === 0) {
+      throw new AppError("No court bookings history found", 404);
+    }
+    return courtBookings;
+  }
+
+  static async checkAvailability(court_id, start_time, end_time) {
+    const conflictingBookings =
+      await CourtBookingRepository.findConflictingBookings(
+        court_id,
+        start_time,
+        end_time
+      );
+
+    return {
+      available: conflictingBookings.length === 0,
+      conflictingBookings: conflictingBookings,
+    };
+  }
+
   static async update(id, updatedData) {
     const updated = await CourtBookingRepository.update(id, updatedData);
     if (!updated) {

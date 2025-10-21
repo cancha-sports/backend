@@ -4,6 +4,7 @@ import {
   UpdateCourtBookingDTO,
 } from "../../application/dtos/CourtBookingDTO.js";
 import {
+  checkAvailabilitySchema,
   createCourtBookingSchema,
   updateCourtBookingSchema,
 } from "../validations/CourtBookingValidator.js";
@@ -13,7 +14,10 @@ export default class CourtBookingController {
   static async create(req, res) {
     try {
       const validatedData = createCourtBookingSchema.parse(req.body);
-      const createCourtBookingDTO = new CreateCourtBookingDTO(validatedData);
+      const createCourtBookingDTO = new CreateCourtBookingDTO({
+        ...validatedData,
+        user_id: req.user.id,
+      });
       const courtBooking = await CourtBookingService.create(
         createCourtBookingDTO
       );
@@ -53,6 +57,59 @@ export default class CourtBookingController {
       );
       return res.status(200).json(courtBookings);
     } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async findByUserId(req, res) {
+    try {
+      const courtBookings = await CourtBookingService.findByUserId(req.user.id);
+      return res.status(200).json(courtBookings);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async findUpcomingByUserId(req, res) {
+    try {
+      const courtBookings = await CourtBookingService.findUpcomingByUserId(
+        req.user.id
+      );
+      return res.status(200).json(courtBookings);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async findHistoryByUserId(req, res) {
+    try {
+      const courtBookings = await CourtBookingService.findHistoryByUserId(
+        req.user.id
+      );
+      return res.status(200).json(courtBookings);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async checkAvailability(req, res) {
+    try {
+      const validatedData = checkAvailabilitySchema.parse(req.body);
+      const { court_id, start_time, end_time } = validatedData;
+
+      const availability = await CourtBookingService.checkAvailability(
+        court_id,
+        start_time,
+        end_time
+      );
+
+      return res.status(200).json(availability);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res
+          .status(400)
+          .json({ error: error.errors.map((e) => e.message) });
+      }
       return res.status(error.statusCode || 500).json({ error: error.message });
     }
   }

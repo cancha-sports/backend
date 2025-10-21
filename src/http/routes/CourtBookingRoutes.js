@@ -6,13 +6,28 @@ const router = new Router();
 
 router.post("/", authMiddleware, CourtBookingController.create);
 router.get("/", authMiddleware, CourtBookingController.findAll);
+router.get("/user", authMiddleware, CourtBookingController.findByUserId);
+router.get(
+  "/upcoming",
+  authMiddleware,
+  CourtBookingController.findUpcomingByUserId
+);
+router.get(
+  "/history",
+  authMiddleware,
+  CourtBookingController.findHistoryByUserId
+);
+router.post(
+  "/check-availability",
+  authMiddleware,
+  CourtBookingController.checkAvailability
+);
 router.get("/:id", authMiddleware, CourtBookingController.findById);
 router.get(
   "/court/:court_id",
   authMiddleware,
   CourtBookingController.findByCourtId
 );
-
 router.patch("/:id", authMiddleware, CourtBookingController.update);
 router.delete("/:id", authMiddleware, CourtBookingController.delete);
 

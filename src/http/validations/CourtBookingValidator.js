@@ -9,14 +9,6 @@ export const createCourtBookingSchema = z.object({
     .int("Court ID must be an integer.")
     .positive("Court ID must be a positive number."),
 
-  user_id: z
-    .number({
-      required_error: "User ID is required.",
-      invalid_type_error: "User ID must be a number.",
-    })
-    .int("User ID must be an integer.")
-    .positive("User ID must be a positive number."),
-
   start_time: z
     .string({
       required_error: "Start time is required.",
@@ -69,4 +61,22 @@ export const updateCourtBookingSchema = z.object({
       invalid_type_error: "Status must be either 'confirmed' or 'canceled'.",
     })
     .optional(),
+});
+
+export const checkAvailabilitySchema = z.object({
+  court_id: z
+    .number({
+      required_error: "Court ID is required.",
+      invalid_type_error: "Court ID must be a number.",
+    })
+    .int("Court ID must be an integer.")
+    .positive("Court ID must be a positive number."),
+
+  start_time: z.string({
+    required_error: "Start time is required.",
+  }),
+
+  end_time: z.string({
+    required_error: "End time is required.",
+  }),
 });
