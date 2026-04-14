@@ -1,11 +1,11 @@
 export class CreateUserDTO {
-  constructor({ name, email, phone, password, birth_date, role_id, photo }) {
+  constructor({ name, email, phone, password, birth_date, role, photo }) {
     this.name = name;
     this.email = email;
     this.phone = phone;
     this.password = password;
     this.birth_date = birth_date;
-    this.role_id = role_id;
+    this.role = role;
     this.photo = photo;
   }
 }

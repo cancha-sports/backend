@@ -25,7 +25,7 @@ export default class AuthService {
       phone: registerDTO.phone,
       password_hash: hashedPassword,
       birth_date: registerDTO.birth_date,
-      role_id: registerDTO.role_id,
+      role: registerDTO.role,
       photo: registerDTO.photo,
     };
 
@@ -54,13 +54,13 @@ export default class AuthService {
     // Check password
     const isPasswordValid = await checkPasswordHash(
       loginDTO.password,
-      user.password_hash
+      user.password_hash,
     );
     if (!isPasswordValid) {
       throw new AppError("Invalid email or password.", 401);
     }
 
-    if (user.role_id !== 3) {
+    if (user.role !== "owner") {
       throw new AppError("Access denied. Only court owners can login.", 403);
     }
 
@@ -84,13 +84,13 @@ export default class AuthService {
     // Check password
     const isPasswordValid = await checkPasswordHash(
       loginDTO.password,
-      user.password_hash
+      user.password_hash,
     );
     if (!isPasswordValid) {
       throw new AppError("Invalid email or password.", 401);
     }
 
-    if (user.role_id !== 2) {
+    if (user.role !== "customer") {
       throw new AppError("Access denied. Only regular users can login.", 403);
     }
 
@@ -109,7 +109,7 @@ export default class AuthService {
     const payload = {
       id: user.id,
       email: user.email,
-      role_id: user.role_id,
+      role: user.role,
     };
 
     return jwt.sign(payload, process.env.JWT_SECRET, {

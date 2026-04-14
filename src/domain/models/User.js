@@ -32,9 +32,10 @@ export default class User extends Model {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
-        role_id: {
-          type: DataTypes.INTEGER,
+        role: {
+          type: DataTypes.ENUM("admin", "owner", "customer"),
           allowNull: false,
+          defaultValue: "customer",
         },
         email_verified_at: {
           type: DataTypes.DATE,
@@ -54,16 +55,11 @@ export default class User extends Model {
         underscored: true,
         paranoid: true,
         deletedAt: "deleted_at",
-      }
+      },
     );
   }
 
   static associate(models) {
-    this.belongsTo(models.UserRole, {
-      foreignKey: "role_id",
-      as: "role",
-    });
-
     this.hasMany(models.Establishment, {
       foreignKey: "owner_id",
       as: "establishments",
@@ -72,11 +68,6 @@ export default class User extends Model {
     this.hasMany(models.CourtBooking, {
       foreignKey: "user_id",
       as: "court_bookings",
-    });
-
-    this.hasMany(models.RecreationAreaBooking, {
-      foreignKey: "user_id",
-      as: "recreation_bookings",
     });
   }
 }

@@ -6,13 +6,13 @@ export class LoginDTO {
 }
 
 export class RegisterDTO {
-  constructor({ name, email, phone, password, birth_date, photo, role_id }) {
+  constructor({ name, email, phone, password, birth_date, photo, role }) {
     this.name = name;
     this.email = email;
     this.phone = phone;
     this.password = password;
     this.birth_date = birth_date;
-    this.role_id = role_id;
+    this.role = role;
     this.photo = photo;
   }
 }

@@ -14,13 +14,7 @@ export const createCourtSchema = z.object({
     .int("Establishment ID must be an integer.")
     .positive("Establishment ID must be a positive number."),
 
-  sport_id: z
-    .number({
-      required_error: "Sport ID is required.",
-      invalid_type_error: "Sport ID must be a number.",
-    })
-    .int("Sport ID must be an integer.")
-    .positive("Sport ID must be a positive number."),
+  sport: z.enum(["soccer", "futsal", "padel", "tennis"]),
 
   photo: z
     .string()
@@ -35,13 +29,7 @@ export const updateCourtSchema = z.object({
     .max(100, "Name must be at most 100 characters.")
     .optional(),
 
-  sport_id: z
-    .number({
-      invalid_type_error: "Sport ID must be a number.",
-    })
-    .int("Sport ID must be an integer.")
-    .positive("Sport ID must be a positive number.")
-    .optional(),
+  sport: z.enum(["soccer", "futsal", "padel", "tennis"]),
 
   photo: z
     .string()

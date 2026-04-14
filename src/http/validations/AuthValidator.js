@@ -17,7 +17,7 @@ export const registerSchema = z.object({
     {
       message:
         "Birth date must be a valid date in ISO format (YYYY-MM-DD) and cannot be in the future.",
-    }
+    },
   ),
 
   email: z
@@ -45,13 +45,7 @@ export const registerSchema = z.object({
       message: "Password must contain at least one special character.",
     }),
 
-  role_id: z
-    .number({
-      required_error: "Role ID is required.",
-      invalid_type_error: "Role ID must be a number.",
-    })
-    .int("Role ID must be an integer.")
-    .positive("Role ID must be a positive number."),
+  role: z.enum(["admin", "owner", "customer"]),
 
   photo: z
     .string()

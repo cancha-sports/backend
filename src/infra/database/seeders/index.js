@@ -1,25 +1,10 @@
 import Database from "../index.js";
-import seedSport from "./20250817023249-demo-sport.cjs";
-import seedRecreationAreaType from "./20250817041600-demo-recreation-area-type.cjs";
-import seedUserRole from "./20250817125936-demo-user-role.cjs";
 import seedUser from "./20250817195706-demo-user.cjs";
 import seedEstablishment from "./20250817195252-demo-establishment.cjs";
 import seedCourt from "./20250817213015-demo-court.cjs";
-import seedRecreationArea from "./20250817224624-demo-recreation-area.cjs";
 import seedCourtSchedule from "./20250818001447-demo-court-schedule.cjs";
-import seedRecreationAreaSchedule from "./20250818020448-demo-recreation-area-schedule.cjs";
 
-const allSeeds = [
-  seedSport,
-  seedRecreationAreaType,
-  seedUserRole,
-  seedUser,
-  seedEstablishment,
-  seedCourt,
-  seedRecreationArea,
-  seedCourtSchedule,
-  seedRecreationAreaSchedule,
-];
+const allSeeds = [seedUser, seedEstablishment, seedCourt, seedCourtSchedule];
 
 const reverseSeeds = [...allSeeds].reverse();
 

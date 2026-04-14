@@ -12,7 +12,7 @@ module.exports = {
         phone: "+55 11 98765-4321",
         password_hash: hashedPassword,
         birth_date: "1990-01-15",
-        role_id: 1,
+        role: "admin",
       },
       {
         name: "Maria Oliveira",
@@ -20,7 +20,7 @@ module.exports = {
         phone: "+55 21 99876-5432",
         password_hash: hashedPassword,
         birth_date: "1985-05-22",
-        role_id: 1,
+        role: "admin",
       },
       {
         name: "Carlos Pereira",
@@ -28,7 +28,7 @@ module.exports = {
         phone: "+55 31 99123-4567",
         password_hash: hashedPassword,
         birth_date: "1992-11-30",
-        role_id: 2,
+        role: "customer",
       },
       {
         name: "Ana Costa",
@@ -36,7 +36,7 @@ module.exports = {
         phone: "+55 41 99234-5678",
         password_hash: hashedPassword,
         birth_date: "1988-07-10",
-        role_id: 2,
+        role: "customer",
       },
       {
         name: "Pedro Santos",
@@ -44,7 +44,7 @@ module.exports = {
         phone: "+55 51 99345-6789",
         password_hash: hashedPassword,
         birth_date: "1995-03-25",
-        role_id: 3,
+        role: "owner",
       },
       {
         name: "Juliana Lima",
@@ -52,7 +52,7 @@ module.exports = {
         phone: "+55 61 99456-7890",
         password_hash: hashedPassword,
         birth_date: "1998-09-18",
-        role_id: 3,
+        role: "owner",
       },
     ]);
   },

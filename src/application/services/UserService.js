@@ -11,7 +11,7 @@ export default class UserService {
       phone: userDTO.phone,
       password_hash: hashedPassword,
       birth_date: userDTO.birth_date,
-      role_id: userDTO.role_id,
+      role: userDTO.role,
       photo: userDTO.photo,
     };
     const created = await UserRepository.create(userData);

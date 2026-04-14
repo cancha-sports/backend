@@ -7,22 +7,22 @@ module.exports = {
       {
         name: "Quadra de futebol",
         establishment_id: 1,
-        sport_id: 1,
+        sport: "soccer",
       },
       {
         name: "Quadra de futebol coberta",
         establishment_id: 2,
-        sport_id: 1,
+        sport: "soccer",
       },
       {
         name: "Quadra de futebol coberta 2",
         establishment_id: 2,
-        sport_id: 1,
+        sport: "soccer",
       },
       {
         name: "Quadra de futebol aberta",
         establishment_id: 2,
-        sport_id: 1,
+        sport: "soccer",
       },
     ]);
   },

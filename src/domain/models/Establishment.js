@@ -44,7 +44,7 @@ export default class Establishment extends Model {
         createdAt: "created_at",
         updatedAt: "updated_at",
         underscored: true,
-      }
+      },
     );
   }
 
@@ -52,11 +52,6 @@ export default class Establishment extends Model {
     this.belongsTo(models.User, {
       foreignKey: "owner_id",
       as: "owner",
-    });
-
-    this.hasMany(models.RecreationArea, {
-      foreignKey: "establishment_id",
-      as: "recreation_areas",
     });
 
     this.hasMany(models.Court, {

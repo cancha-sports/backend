@@ -19,8 +19,8 @@ export default class Court extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        sport_id: {
-          type: DataTypes.INTEGER,
+        sport: {
+          type: DataTypes.ENUM("soccer", "futsal", "padel", "tennis"),
           allowNull: false,
         },
         photo: {
@@ -35,7 +35,7 @@ export default class Court extends Model {
         createdAt: "created_at",
         updatedAt: "updated_at",
         underscored: true,
-      }
+      },
     );
   }
 
@@ -43,11 +43,6 @@ export default class Court extends Model {
     this.belongsTo(models.Establishment, {
       foreignKey: "establishment_id",
       as: "establishment",
-    });
-
-    this.belongsTo(models.Sport, {
-      foreignKey: "sport_id",
-      as: "sport",
     });
 
     this.hasOne(models.CourtSchedule, {
