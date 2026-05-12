@@ -67,11 +67,11 @@ export const forgotPasswordSchema = z.object({
 
 export const validateResetCodeSchema = z.object({
   email: z.string().email(),
-  code: z.string().length(4, "Code must be 4 digits"),
+  code: z.string().length(6, "Code must be 6 digits"),
 });
 
 export const resetPasswordSchema = z.object({
   email: z.string().email(),
-  code: z.string().length(4),
+  code: z.string().length(6),
   newPassword: z.string().min(8).max(64),
 });
