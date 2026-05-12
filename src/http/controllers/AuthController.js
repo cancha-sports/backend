@@ -120,4 +120,19 @@ export default class AuthController {
       return res.status(error.statusCode || 500).json({ error: error.message });
     }
   }
+
+  static async changePassword(req, res) {
+    try {
+      const { currentPassword, newPassword } = req.body;
+      const userId = req.user.id;
+      const result = await AuthService.changePassword(
+        userId,
+        currentPassword,
+        newPassword,
+      );
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
 }

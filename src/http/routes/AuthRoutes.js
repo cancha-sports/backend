@@ -11,5 +11,6 @@ router.get("/me", authMiddleware, AuthController.getMe);
 router.post("/forgot-password", AuthController.forgotPassword);
 router.post("/validate-reset-code", AuthController.validateResetCode);
 router.post("/reset-password", AuthController.resetPassword);
+router.post("/change-password", authMiddleware, AuthController.changePassword);
 
 export { router as AuthRoutes };

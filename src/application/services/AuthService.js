@@ -207,4 +207,23 @@ export default class AuthService {
 
     await AuthRepository.deletePasswordResetCode(user.id);
   }
+
+  static async changePassword(userId, currentPassword, newPassword) {
+    const user = await UserRepository.findById(userId);
+    if (!user) {
+      throw new AppError("Usuário não encontrado.", 404);
+    }
+
+    const isValid = await checkPasswordHash(
+      currentPassword,
+      user.password_hash,
+    );
+    if (!isValid) {
+      throw new AppError("Senha atual incorreta.", 401);
+    }
+
+    const hashedNew = await hashPassword(newPassword);
+    await UserRepository.update(userId, { password_hash: hashedNew });
+    return { message: "Senha alterada com sucesso." };
+  }
 }
