@@ -4,7 +4,13 @@ import {
   RegisterDTO,
   AuthResponseDTO,
 } from "../../application/dtos/AuthDTO.js";
-import { loginSchema, registerSchema } from "../validations/AuthValidator.js";
+import {
+  loginSchema,
+  registerSchema,
+  forgotPasswordSchema,
+  validateResetCodeSchema,
+  resetPasswordSchema,
+} from "../validations/AuthValidator.js";
 import { ZodError } from "zod";
 
 export default class AuthController {
@@ -64,6 +70,53 @@ export default class AuthController {
       const user = await AuthService.getCurrentUser(req.user.id);
       return res.status(200).json({ user });
     } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async forgotPassword(req, res) {
+    try {
+      const { email } = forgotPasswordSchema.parse(req.body);
+      await AuthService.forgotPassword(email);
+      return res.status(200).json({ message: "Code sent to your email." });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res
+          .status(400)
+          .json({ error: error.errors.map((e) => e.message) });
+      }
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async validateResetCode(req, res) {
+    try {
+      const { email, code } = validateResetCodeSchema.parse(req.body);
+      await AuthService.validateResetCode(email, code);
+      return res.status(200).json({ valid: true });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res
+          .status(400)
+          .json({ error: error.errors.map((e) => e.message) });
+      }
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+
+  static async resetPassword(req, res) {
+    try {
+      const { email, code, newPassword } = resetPasswordSchema.parse(req.body);
+      await AuthService.resetPassword(email, code, newPassword);
+      return res
+        .status(200)
+        .json({ message: "Password successfully updated." });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res
+          .status(400)
+          .json({ error: error.errors.map((e) => e.message) });
+      }
       return res.status(error.statusCode || 500).json({ error: error.message });
     }
   }

@@ -266,6 +266,37 @@ module.exports = {
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
+    await queryInterface.createTable("password_reset_codes", {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: "users", key: "id" },
+        onDelete: "CASCADE",
+      },
+      code_hash: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      expires_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+      },
+    });
   },
 
   async down(queryInterface, Sequelize) {
@@ -274,5 +305,6 @@ module.exports = {
     await queryInterface.dropTable("courts");
     await queryInterface.dropTable("establishments");
     await queryInterface.dropTable("users");
+    await queryInterface.dropTable("password_reset_codes");
   },
 };

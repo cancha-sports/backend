@@ -1,5 +1,8 @@
 import UserRepository from "../../domain/repositories/UserRepository.js";
+import AuthRepository from "../../domain/repositories/AuthRepository.js";
+import { EmailService } from "../../shared/utils/mailer.js";
 import { hashPassword, checkPasswordHash } from "../../shared/utils/hash.js";
+import generateRandomCode from "../../shared/utils/generateRandomCode.js";
 import AppError from "../../shared/errors/AppError.js";
 import jwt from "jsonwebtoken";
 
@@ -137,5 +140,74 @@ export default class AuthService {
       : user;
 
     return userWithoutPassword;
+  }
+
+  static async forgotPassword(email) {
+    const user = await UserRepository.findByEmail(email);
+    if (!user) return; // silencioso por segurança
+
+    const code = generateRandomCode(6);
+    const codeHash = await hashPassword(code);
+    const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 min
+
+    await AuthRepository.createPasswordResetCode({
+      user_id: user.id,
+      code_hash: codeHash,
+      expires_at: expiresAt,
+    });
+
+    // Envia o código por email
+    await EmailService.sendEmailPasswordReset(user.email, code);
+  }
+
+  static async validateResetCode(email, code) {
+    const user = await UserRepository.findByEmail(email);
+    if (!user) {
+      throw new AppError("User not found.", 400);
+    }
+
+    const resetCodeRecord = await AuthRepository.findPasswordResetCode(user.id);
+    if (!resetCodeRecord) {
+      throw new AppError("Code expired or not found.", 400);
+    }
+
+    const isCodeValid = await checkPasswordHash(
+      code,
+      resetCodeRecord.code_hash,
+    );
+    if (!isCodeValid) {
+      throw new AppError("Invalid code.", 400);
+    }
+
+    // Após validar, deletamos o código
+    await AuthRepository.deletePasswordResetCode(user.id);
+    return true;
+  }
+
+  static async resetPassword(email, code, newPassword) {
+    const user = await UserRepository.findByEmail(email);
+    if (!user) {
+      throw new AppError("User not found.", 400);
+    }
+
+    // Verifica o código novamente
+    const resetCodeRecord = await AuthRepository.findPasswordResetCode(user.id);
+    if (!resetCodeRecord) {
+      throw new AppError("Code expired or not found.", 400);
+    }
+
+    const isCodeValid = await checkPasswordHash(
+      code,
+      resetCodeRecord.code_hash,
+    );
+    if (!isCodeValid) {
+      throw new AppError("Invalid code.", 400);
+    }
+
+    const newPasswordHash = await hashPassword(newPassword);
+    await UserRepository.update(user.id, { password_hash: newPasswordHash });
+
+    // Deleta o código após uso
+    await AuthRepository.deletePasswordResetCode(user.id);
   }
 }

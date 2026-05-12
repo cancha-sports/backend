@@ -60,3 +60,18 @@ export const loginSchema = z.object({
     .email("Invalid email address format."),
   password: z.string().min(1, "Password is required."),
 });
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().email("Invalid email format"),
+});
+
+export const validateResetCodeSchema = z.object({
+  email: z.string().email(),
+  code: z.string().length(4, "Code must be 4 digits"),
+});
+
+export const resetPasswordSchema = z.object({
+  email: z.string().email(),
+  code: z.string().length(4),
+  newPassword: z.string().min(8).max(64),
+});

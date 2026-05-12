@@ -5,8 +5,16 @@ import CourtBooking from "../../domain/models/CourtBooking.js";
 import CourtSchedule from "../../domain/models/CourtSchedule.js";
 import Establishment from "../../domain/models/Establishment.js";
 import User from "../../domain/models/User.js";
+import PasswordResetCode from "../../domain/models/PasswordResetCode.js";
 
-const models = [Court, CourtBooking, CourtSchedule, Establishment, User];
+const models = [
+  Court,
+  CourtBooking,
+  CourtSchedule,
+  Establishment,
+  User,
+  PasswordResetCode,
+];
 
 class Database {
   constructor() {
