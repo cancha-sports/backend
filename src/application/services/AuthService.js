@@ -144,11 +144,13 @@ export default class AuthService {
 
   static async forgotPassword(email) {
     const user = await UserRepository.findByEmail(email);
-    if (!user) return; // silencioso por segurança
+    if (!user) {
+      throw new AppError("Email not registered.", 404);
+    }
 
     const code = generateRandomCode(6);
     const codeHash = await hashPassword(code);
-    const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 min
+    const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
 
     await AuthRepository.createPasswordResetCode({
       user_id: user.id,
@@ -156,7 +158,6 @@ export default class AuthService {
       expires_at: expiresAt,
     });
 
-    // Envia o código por email
     await EmailService.sendEmailPasswordReset(user.email, code);
   }
 
@@ -179,8 +180,6 @@ export default class AuthService {
       throw new AppError("Invalid code.", 400);
     }
 
-    // Após validar, deletamos o código
-    await AuthRepository.deletePasswordResetCode(user.id);
     return true;
   }
 
@@ -190,7 +189,6 @@ export default class AuthService {
       throw new AppError("User not found.", 400);
     }
 
-    // Verifica o código novamente
     const resetCodeRecord = await AuthRepository.findPasswordResetCode(user.id);
     if (!resetCodeRecord) {
       throw new AppError("Code expired or not found.", 400);
@@ -207,7 +205,6 @@ export default class AuthService {
     const newPasswordHash = await hashPassword(newPassword);
     await UserRepository.update(user.id, { password_hash: newPasswordHash });
 
-    // Deleta o código após uso
     await AuthRepository.deletePasswordResetCode(user.id);
   }
 }
