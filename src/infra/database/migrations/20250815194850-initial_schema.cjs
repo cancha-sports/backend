@@ -48,6 +48,11 @@ module.exports = {
         allowNull: true,
         defaultValue: null,
       },
+      is_premium: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

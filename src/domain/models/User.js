@@ -45,6 +45,11 @@ export default class User extends Model {
           type: DataTypes.STRING(255),
           allowNull: true,
         },
+        is_premium: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+        },
       },
       {
         sequelize,

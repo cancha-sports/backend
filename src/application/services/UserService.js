@@ -41,6 +41,7 @@ export default class UserService {
     const userData = {
       name: updatedData.name,
       photo: updatedData.photo,
+      is_premium: updatedData.is_premium,
     };
 
     if (updatedData.password) {

@@ -11,9 +11,10 @@ export class CreateUserDTO {
 }
 
 export class UpdateUserDTO {
-  constructor({ name, password, photo }) {
+  constructor({ name, password, photo, is_premium }) {
     this.name = name;
     this.password = password;
     this.photo = photo;
+    this.is_premium = is_premium;
   }
 }
