@@ -226,4 +226,22 @@ export default class AuthService {
     await UserRepository.update(userId, { password_hash: hashedNew });
     return { message: "Senha alterada com sucesso." };
   }
+
+  static async upgradeToPremium(userId) {
+    const user = await UserRepository.findById(userId);
+    if (!user) {
+      throw new AppError("User not found.", 404);
+    }
+
+    if (user.is_premium) {
+      throw new AppError("User is already premium.", 400);
+    }
+
+    await UserRepository.update(userId, { is_premium: true });
+
+    const updatedUser = await UserRepository.findById(userId);
+    const { password_hash, ...userWithoutPassword } = updatedUser.toJSON();
+
+    return userWithoutPassword;
+  }
 }

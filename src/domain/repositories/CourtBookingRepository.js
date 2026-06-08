@@ -29,9 +29,8 @@ export default class CourtBookingRepository {
     return await CourtBooking.findAll({
       where: {
         user_id,
-        end_time: {
-          [Op.gt]: new Date(),
-        },
+        status: "confirmed",
+        end_time: { [Op.gt]: new Date() },
       },
       order: [["start_time", "ASC"]],
     });
@@ -79,7 +78,7 @@ export default class CourtBookingRepository {
       {
         where: { id },
         returning: true,
-      }
+      },
     );
     if (affectedCount === 0) return null;
     return updatedCourtBooking;

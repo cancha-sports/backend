@@ -1,4 +1,5 @@
 import UserRepository from "../../domain/repositories/UserRepository.js";
+import CourtBookingRepository from "../../domain/repositories/CourtBookingRepository.js";
 import { hashPassword } from "../../shared/utils/hash.js";
 import AppError from "../../shared/errors/AppError.js";
 
@@ -41,7 +42,6 @@ export default class UserService {
     const userData = {
       name: updatedData.name,
       photo: updatedData.photo,
-      is_premium: updatedData.is_premium,
     };
 
     if (updatedData.password) {
@@ -56,6 +56,15 @@ export default class UserService {
   }
 
   static async delete(id) {
+    const activeBookings =
+      await CourtBookingRepository.findUpcomingByUserId(id);
+    if (activeBookings.length > 0) {
+      throw new AppError(
+        "You can't delete your account because you have future reservations. Cancel them first.",
+        400,
+      );
+    }
+
     const deletedCount = await UserRepository.delete(id);
     if (deletedCount === 0) {
       throw new AppError(`User with id ${id} not found`, 404);

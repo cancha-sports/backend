@@ -135,4 +135,17 @@ export default class AuthController {
       return res.status(error.statusCode || 500).json({ error: error.message });
     }
   }
+
+  static async upgradeToPremium(req, res) {
+    try {
+      const userId = req.user.id;
+      const updatedUser = await AuthService.upgradeToPremium(userId);
+      return res.status(200).json({
+        user: updatedUser,
+        message: "Premium activated!",
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
 }
