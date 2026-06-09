@@ -244,4 +244,22 @@ export default class AuthService {
 
     return userWithoutPassword;
   }
+
+  static async cancelPremium(userId) {
+    const user = await UserRepository.findById(userId);
+    if (!user) {
+      throw new AppError("User not found.", 404);
+    }
+
+    if (!user.is_premium) {
+      throw new AppError("User is not premium.", 400);
+    }
+
+    await UserRepository.update(userId, { is_premium: false });
+
+    const updatedUser = await UserRepository.findById(userId);
+    const { password_hash, ...userWithoutPassword } = updatedUser.toJSON();
+
+    return userWithoutPassword;
+  }
 }

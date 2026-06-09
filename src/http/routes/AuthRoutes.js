@@ -13,5 +13,6 @@ router.post("/validate-reset-code", AuthController.validateResetCode);
 router.post("/reset-password", AuthController.resetPassword);
 router.post("/change-password", authMiddleware, AuthController.changePassword);
 router.patch("/upgrade", authMiddleware, AuthController.upgradeToPremium);
+router.patch("/cancel-premium", authMiddleware, AuthController.cancelPremium);
 
 export { router as AuthRoutes };

@@ -148,4 +148,17 @@ export default class AuthController {
       return res.status(error.statusCode || 500).json({ error: error.message });
     }
   }
+
+  static async cancelPremium(req, res) {
+    try {
+      const userId = req.user.id;
+      const updatedUser = await AuthService.cancelPremium(userId);
+      return res.status(200).json({
+        user: updatedUser,
+        message: "Premium subscription cancelled successfully.",
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
 }
