@@ -31,8 +31,9 @@ export default class UserRepository {
   }
 
   static async delete(id) {
-    return await User.destroy({
-      where: { id },
-    });
+    const user = await User.findByPk(id);
+    if (!user) return 0;
+    await user.destroy();
+    return 1;
   }
 }

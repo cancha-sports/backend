@@ -60,6 +60,15 @@ export default class User extends Model {
         underscored: true,
         paranoid: true,
         deletedAt: "deleted_at",
+        hooks: {
+          beforeDestroy: async (user) => {
+            const suffix = `${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+            user.set("name", `deleted_${suffix}`);
+            user.set("email", `deleted_${suffix}@deleted.invalid`);
+            user.set("phone", `deleted_${suffix}`.slice(0, 20));
+            await user.save({ hooks: false });
+          },
+        },
       },
     );
   }
