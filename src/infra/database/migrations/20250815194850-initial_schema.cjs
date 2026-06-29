@@ -305,11 +305,11 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("password_reset_codes");
     await queryInterface.dropTable("court_bookings");
     await queryInterface.dropTable("court_schedules");
     await queryInterface.dropTable("courts");
     await queryInterface.dropTable("establishments");
     await queryInterface.dropTable("users");
-    await queryInterface.dropTable("password_reset_codes");
   },
 };
