@@ -1,4 +1,5 @@
 import "dotenv/config";
+import pg from "pg";
 
 const databaseUrl = process.env.DATABASE_URL
   ? new URL(process.env.DATABASE_URL)
@@ -28,6 +29,7 @@ export default {
   ...databaseConnection,
 
   dialect: "postgres",
+  dialectModule: pg,
   logging: false,
 
   dialectOptions: {
